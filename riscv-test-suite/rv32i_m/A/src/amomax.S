@@ -11,14 +11,14 @@ rvtest_entry_point:
 RVMODEL_BOOT
 RVTEST_CODE_BEGIN
 #ifdef TEST_CASE_1
-    RVTEST_CASE(1,"//check ISA:=regex(.*32.*); check ISA:=regex(.*I.*Zicsr.*); def rvtest_mtrap_routine=True; def rvtest_strap_routine=True; def TEST_CASE_1=True",sv32)
+    RVTEST_CASE(1,"//check ISA:=regex(.*32.*); check ISA:=regex(.*I.*A.*Zicsr.*); def rvtest_mtrap_routine=True; def rvtest_strap_routine=True; def TEST_CASE_1=True",amomax)
 
 RVTEST_SIGBASE( x13,signature_x13_1)
   	
 main:
 
-li x1, 5                      //Initialize x1 to 5
-la x2, my_test_data           //Load address of memory location
+LI(x1, 2)                      //Initialize x1 to 2
+LA(x2, my_test_data)           //Load address of memory location
 
 amomax.w x3, x1, (x2)         //Atomic max x1 to memory_location, store previous value to x3
 
