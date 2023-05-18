@@ -17,15 +17,8 @@ RVTEST_SIGBASE( x13,signature_x13_1)
   	
 main:
 
-li x1, 5                      //Initialize x1 to 5
-la x2, my_test_data           //Load address of memory location
-
-amomax.w x3, x1, (x2)         //Atomic max x1 to memory_location, store previous value to x3
-
-lw x3, (x2)                   //Load new value from memory_location to x3
-
-RVTEST_SIGUPD(x13, x3)
-
+// opcode: amomax.w ; op1:x1; op2:x2; dest:x3; op1val:0x5;  op2val:0x3
+TEST_AMO_OP(amomax.w, x3, x1, x2, 0x5, 0x3, my_test_data, x13, 0x0)
 
 #endif
 
@@ -35,7 +28,7 @@ RVMODEL_HALT
 
 RVTEST_DATA_BEGIN
 my_test_data:
-	.word 0x00000003
+	.word 0x00000000
 
 RVTEST_DATA_END
 

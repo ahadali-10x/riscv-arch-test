@@ -17,15 +17,8 @@ RVTEST_SIGBASE( x13,signature_x13_1)
   	
 main:
 
-li x1, 2                      //Initialize x1 to 2
-la x2, my_test_data           //Load address of memory location
-
-amoadd.w x3, x1, (x2)         //Atomic add x1 to memory_location, store previous value to x3
-
-lw x3, (x2)                   //Load new value from memory_location to x3
-
-RVTEST_SIGUPD(x13, x3)
-
+// opcode: amoadd.w ; op1:x1; op2:x2; dest:x3; op1val:0x2;  op2val:0x3
+TEST_AMO_OP(amoadd.w, x3, x1, x2, 0x2, 0x3, my_test_data, x13, 0x0)
 
 #endif
 
@@ -35,7 +28,7 @@ RVMODEL_HALT
 
 RVTEST_DATA_BEGIN
 my_test_data:
-	.word 0x00000003
+	.word 0x00000000
 
 RVTEST_DATA_END
 
