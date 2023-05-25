@@ -417,12 +417,13 @@ RVTEST_SIGUPD_F(swreg,destreg,flagreg)
     RVTEST_SIGUPD_FID(swreg,destreg,flagreg)	;\
     RVMODEL_IO_ASSERT_GPR_EQ(testreg, destreg, correctval)
 
-#define TEST_AMO_OP(inst, destreg, reg1, reg2, val1, val2, label, swreg, offset) ;\
+#define TEST_AMO_OP(inst, destreg, reg1, reg2, label, val1, val2, swreg, offset) ;\
       LI(reg1, MASK_XLEN(val2))			;\
       LA(reg2, label)                                 ;\
       SREG reg1, (reg2)                               ;\
       LI(reg1, MASK_XLEN(val1))			;\
       inst destreg, reg1, (reg2)			;\
+      LA(reg2, label)                                 ;\
       LREG destreg, (reg2)                            ;\
       RVTEST_SIGUPD(swreg,destreg,offset)
 
