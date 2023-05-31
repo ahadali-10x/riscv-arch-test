@@ -1,4 +1,6 @@
 # CHANGELOG
+## [3.6.6] - 2023-05-31
+- Added atomic ACTs for RV32. 
 
 ## [3.6.5] - 2023-05-06
 - Fix test condition in RVTEST_CASE for `c.ebreak` (RV32 and RV64) test. 
