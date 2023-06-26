@@ -1,4 +1,7 @@
 # CHANGELOG
+## [3.6.6] - 2023-06-26
+- Added atomic ACTs for RV64.
+
 ## [3.6.6] - 2023-05-31
 - Added atomic ACTs for RV32. 
 
