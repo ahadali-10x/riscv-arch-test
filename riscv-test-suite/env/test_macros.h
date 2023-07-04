@@ -419,10 +419,12 @@ RVTEST_SIGUPD_F(swreg,destreg,flagreg)
 
 #define TEST_AMO_OP(inst, destreg, reg1, reg2, val1, val2, swreg, offset) ;\
       LI(reg1, MASK_XLEN(val2))			;\
-      addi reg2, swreg, offset                        ;\
-      SREG reg1, (reg2)                               ;\
+      RVTEST_SIGUPD(swreg, reg1, offset)              ;\
       LI(reg1, MASK_XLEN(val1))			;\
-      inst destreg, reg1, (reg2)
+      LI(reg2, MASK_XLEN(offset))                     ;\
+      add reg2, reg2, swreg                           ;\
+      inst destreg, reg1, (reg2)                      ;\
+      RVTEST_SIGUPD(swreg, destreg)
 
 #define TEST_AUIPC(inst, destreg, correctval, imm, swreg, offset, testreg)	;\
     TEST_CASE(testreg, destreg, correctval, swreg, offset, \
