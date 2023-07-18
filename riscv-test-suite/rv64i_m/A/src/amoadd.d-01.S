@@ -1,5 +1,4 @@
 
-
 // This assembly file tests the amoadd.d instruction of the RISC-V RV64A extension for the amoadd.d covergroup.
 // 
 #include "model_test.h"
