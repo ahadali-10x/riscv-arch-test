@@ -17,17 +17,18 @@ RVTEST_SIGBASE( x3,signature_x3_1)
 
 main:
 
-csrr x1, misa
-RVTEST_SIGUPD(x3, x1)
+// This test check the writability of Misa controlled through command line flags
+csrr x1, misa           //Readind Misa
+RVTEST_SIGUPD(x3, x1)   //Storing in the signature
 
-li x2, 0xFFFFFFD3
-and x1, x1, x2
+li x2, 0xFFFFFFD3  
+and x1, x1, x2         //Changing the value to disable C & F/D extension
 
 
-csrw misa, x1
+csrw misa, x1         //Writing the value to Misa
 
-csrr x4, misa
-RVTEST_SIGUPD(x3, x4)
+csrr x4, misa         //Readind Misa
+RVTEST_SIGUPD(x3, x4) //Storing in the signature
 
 #endif
 

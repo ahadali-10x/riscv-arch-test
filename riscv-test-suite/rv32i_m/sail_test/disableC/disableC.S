@@ -16,18 +16,18 @@ RVTEST_CASE(0,"//check ISA:=regex(.*32.*);check ISA:=regex(.*I.*A.*);def TEST_CA
 RVTEST_SIGBASE( x3,signature_x3_1)
 
 main:
-
-csrr x1, misa
-RVTEST_SIGUPD(x3, x1)
+// This test check the writability of Misa.C controlled through command line flags
+csrr x1, misa               //Readind Misa
+RVTEST_SIGUPD(x3, x1)       //Storing in the signature
 
 li x2, 0x00000004
-or x1, x1, x2
+or x1, x1, x2               //Enabling C extension while misa.c was not enabled at boot
 
 
-csrw misa, x1
+csrw misa, x1               //Writing Misa  
 
-csrr x4, misa
-RVTEST_SIGUPD(x3, x4)
+csrr x4, misa               //Readind Misa
+RVTEST_SIGUPD(x3, x4)       //Storing in the signature
 
 #endif
 

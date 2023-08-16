@@ -17,17 +17,18 @@ RVTEST_SIGBASE( x3,signature_x3_1)
 
 main:
 
-csrr x1, misa
-RVTEST_SIGUPD(x3, x1)
+//This test checks condition if by disabling C next PC would become misaligned.
+csrr x1, misa            //Readind Misa
+RVTEST_SIGUPD(x3, x1)    //Storing in the signature
 
 li x2, 0xFFFFFFFB
-and x1, x1, x2
-c.li x5, 4
+and x1, x1, x2           //Changing the value for disabling C extension
+c.li x5, 4               // Added a compressed instruction to make PC[1] == 1
 
-csrw misa, x1
+csrw misa, x1            //Writing Misa
 
-csrr x4, misa
-RVTEST_SIGUPD(x3, x4)
+csrr x4, misa            //Readind Misa
+RVTEST_SIGUPD(x3, x4)    //Storing in the signature
 
 #endif
 
